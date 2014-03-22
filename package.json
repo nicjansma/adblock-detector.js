@@ -1,0 +1,25 @@
+{
+    "name": "adblock-detector",
+    "description": "Adblock Detector",
+    "main": "./src/adblock-detector",
+    "author": "Nic Jansma",
+    "version": "0.1.0",
+    "repository" : {
+        "type" : "git",
+        "url" : "http://github.com/nicjansma/adblock-detector.js.git"
+    },
+    "bugs" : {
+        "url" : "http://github.com/nicjansma/adblock-detector.js/issues"
+    },
+    "licenses" : [
+        {
+            "type" : "MIT",
+            "url" : "http://github.com/nicjansma/adblock-detector.js/raw/master/LICENSE"
+        }
+    ],
+    "devDependencies": {
+        "grunt": ">= 0.4.0",
+        "grunt-contrib-jshint": ">0.0.0",
+        "grunt-contrib-uglify": ">0.0.0"
+    }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "adblock-detector",
+  "version": "0.0.1",
+  "homepage": "https://github.com/nicjansma/adblock-detector.js",
+  "authors": [
+    "Nic Jansma <nic@nicj.net>"
+  ],
+  "description": "Adblock Detector",
+  "main": "src/adblock-detector.js",
+  "keywords": [
+    "adblock",
+    "ads",
+    "adblocker"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.9.0"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "Gruntfile.js",
+    "deps",
+    "dist",
+    "node_modules",
+    "bower_components",
+    "test"
+  ]
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>AdblockDetector - Test</title>
+        <script src="../deps/jquery-1.11.0.min.js"></script>
+        <script src="../src/adblock-detector.js"></script>
+        <script src="../deps/nodeunit.js"></script>
+        <link rel="stylesheet" href="../deps/nodeunit.css" type="text/css" media="screen" />
+    </head>
+    <body>
+        <h1 id="nodeunit-header">adblock-detector.js Test Suite</h1>
+        
+        <button id="no-ad-blocker">Run Tests w/ NO Ad Blocker</button>
+        <button id="ad-blocker">Run Tests w/ Ad Blocker</button>
+        
+        <script type="text/javascript">
+            //
+            // NOTE: Modify this with a valid AdSense client ID to test with
+            //
+            var PUB_CLIENT = "pub-123";
+
+            // Google AdSense vars
+            google_ad_client=PUB_CLIENT;
+            google_ad_width=234;
+            google_ad_height=60;
+            google_ad_format="234x60_as";
+            google_ad_type="text";
+            google_color_border="FFFFFF";
+            google_color_bg="FF0000";
+            google_color_link="FF0000";
+            google_color_url="FF0000";
+            google_color_text="FF0000";
+        </script>
+        
+        <div class="ad-container" style="width: 234px; height: 60px">
+            <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+        </div>
+        <div class="ad-container" style="width: 234px; height: 60px">
+            <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+        </div>
+        <script>
+            //
+            // Tests
+            //
+            var tests = {};
+            
+            //
+            // Tests - Ad Blocker
+            //
+            tests.blocker = {};
+            
+            //
+            // detect()
+            //
+            tests.blocker.detect = function(test) {
+                test.expect(4);
+
+                AdblockDetector.detect({
+                    timeout: 0,
+                    blocked: function(element) { 
+                        test.ok(element, 'Element passed in');
+                    },
+                    complete: function(adCount, adsBlockedCount) {
+                        test.equal(2, adCount, '2 ads detected');
+                        test.equal(2, adsBlockedCount, '2 ads blocked');
+                        test.done();
+                    }
+                });
+            };
+            
+            //
+            // hasAdsBlocked();
+            //
+            tests.blocker.hasAdsBlocked = function(test) {
+                test.expect(2);
+
+                $('.ad-container').each(function(i, element) {
+                    test.ok(AdblockDetector.hasAdsBlocked(element));
+                });
+                
+                test.done();
+            };
+
+            //
+            // Tests - No Ad Blocker
+            //
+            tests.no = {};
+            
+            //
+            // detect()
+            //
+            tests.no.detect = function(test) {
+                test.expect(2);
+
+                AdblockDetector.detect({
+                    timeout: 0,
+                    blocked: function(element) { 
+                        test.fail('Detector detected!');
+                    },
+                    complete: function(adCount, adsBlockedCount) {
+                        test.equal(2, adCount, '2 ads detected');
+                        test.equal(0, adsBlockedCount, 'No ads blocked');
+                        test.done();
+                    }
+                });
+            };
+            
+            //
+            // hasAdsBlocked();
+            //
+            tests.no.hasAdsBlocked = function(test) {
+                test.expect(2);
+
+                $('.ad-container').each(function(i, element) {
+                    test.ok(AdblockDetector.hasAdsBlocked(element) === false);
+                });
+                
+                test.done();
+            };
+            
+            // run tests
+            $('#no-ad-blocker').click(function() {
+                nodeunit.run({'noblocker': tests.no});
+            });
+
+            $('#ad-blocker').click(function() {
+                nodeunit.run({'blocker': tests.blocker});
+            });
+        </script>
+    </body>
+</html>

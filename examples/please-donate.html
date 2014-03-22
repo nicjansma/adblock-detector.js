@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>AdblockDetector - Example - Please Donate</title>
+        <script src="../deps/jquery-1.11.0.min.js"></script>
+        <script src="../deps/jquery.cookie.js"></script>
+        <script src="../src/adblock-detector.js"></script>
+        <style>
+            * {
+                font-family: Verdana;
+            }
+            .please-donate {
+                padding: 10px;
+                color: #999;
+                text-align: center;
+                display: table-cell;
+            }
+            
+            .please-donate a {
+                color: #999;
+            }
+            
+            #content {
+                width: 728px; 
+            }
+ 
+            .ad-container {
+                width: 728px; 
+                height: 90px;
+            }
+            
+            #results {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="nodeunit-header">adblock-detector.js - Example - Please Donate</h1>
+        
+        <script type="text/javascript">
+            //
+            // NOTE: Modify this with a valid AdSense client ID to test with
+            //
+            var PUB_CLIENT = "pub-123";
+
+            // Google AdSense vars
+            google_ad_client=PUB_CLIENT;
+            google_ad_width=728;
+            google_ad_height=90;
+            google_ad_format="728x90_as";
+            google_ad_type="text";
+            google_color_border="FFFFFF";
+            google_color_bg="FF0000";
+            google_color_link="FF0000";
+            google_color_url="FF0000";
+            google_color_text="FF0000";
+        </script>
+        
+        <div class="ad-container">
+            <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+        </div>
+        
+        <div id="content">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et 
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip 
+            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
+            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+            mollit anim id est laborum.
+        </div>
+        
+        <div class="ad-container" style="width: 728px; height: 90px; margin-top: 10px">
+            <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+        </div>
+        
+        <div id="results"></div>
+        
+        <script>
+            AdblockDetector.detect({
+                timeout: 500,
+                blocked: function(element) {
+                    if ($.cookie('hide-ad-nag')) {
+                        return;
+                    }
+                    
+                    var html = '<div class="please-donate">It looks like you\'re using an ad-blocker. That\'s cool. If you enjoy using this site, please consider a ' +
+                               '<span style="color: green;">Bitcoin donation</span> to ' +
+                               '<a href="bitcoin:1PVhFgNmTNmHsCEdNA2HHH18pFNiaVLUa9">1PVhFgNmTNmHsCEdNA2HHH18pFNiaVLUa9</a>, ' + 
+                               'or you can ' + 
+                               '<a href="#" class="hide-message">hide this message for 100 days via a cookie</a>.</div>';
+                
+                    $(element).html(html);
+                },
+                complete: function(ads, blocked) {
+                    var html = '';
+                    if (blocked === 0) {
+                        html = 'Thanks for not using an ad-blocker!';
+                    } else {
+                        html = blocked + ' of ' + ads + ' ads blocked.';
+                    }
+                    
+                    if ($.cookie('hide-ad-nag')) {
+                        html += '  You requested that the nag message be hidden for a year';
+                    }
+                    
+                    $('#results').html(html);
+                }
+            });
+            
+            // When 'hide this message for 100 days via a cookie' is clicked
+            $(document).on('click', '.hide-message', function() {
+                // note they don't want to see ads for 1 year
+                $.cookie('hide-ad-nag', true, { expires: 365, path: '/' });
+
+                // show a thanks message that fades
+                $('.please-donate').html('KTHNXBAI').fadeOut('slow');
+
+                return false;
+            });
+        </script>
+    </body>
+</html>
