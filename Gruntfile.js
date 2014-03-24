@@ -53,6 +53,6 @@ module.exports = function(grunt) {
     //
     grunt.registerTask('default', ['jshint', 'uglify']);
     grunt.registerTask('lint', ['uglify']);
-    grunt.registerTask('travis', ['nodeunit', 'jshint']);
-    grunt.registerTask('all', ['nodeunit', 'jshint', 'uglify']);
+    grunt.registerTask('travis', ['jshint']);
+    grunt.registerTask('all', ['jshint', 'uglify']);
 };
