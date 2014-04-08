@@ -54,10 +54,16 @@
 
             if (adWindow && adWindow.document) {
                 var adDoc = adWindow.document;
-
-                if ($(adDoc).find('iframe').length > 0 &&
-                    $(adDoc).find('iframe')[0].className !== '') {
-                    return true;
+                var adDocFrames = $(adDoc).find('iframe');
+                
+                if (adDocFrames.length > 0) {
+                    if (adDocFrames[0].className !== '') {
+                        // AdBlock Plus
+                        return true;
+                    } else if (!adDocFrames.is(':visible')) {
+                        // Remove It Permanently (Firefox)
+                        return true;
+                    }
                 }
             }
         } else {

@@ -1,6 +1,6 @@
 # adblock-detector.js
 
-v0.0.1
+v0.1.1
 
 Copyright 2014 Nic Jansma
 
@@ -14,7 +14,8 @@ Licensed under the MIT license
 browser such as [Adblock Plus](https://adblockplus.org/).
 
 As of March 2014, this library is able to detect Google AdSense ads being blocked on Windows machines when
-[Adblock Plus](https://adblockplus.org/) is installed for the following browsers:
+[Adblock Plus](https://adblockplus.org/) or [Remove It Permanently](https://addons.mozilla.org/en-US/firefox/addon/remove-it-permanently/)
+is installed for the following browsers:
 
 * Internet Explorer 11
 * Firefox 27
@@ -206,3 +207,4 @@ The tests are run manually.  You should load the `test.html` in your browser of 
 ## Version History
 
 * v0.0.1 - 2014-03-22: Initial version
+* v0.1.1 - 2014-04-08: Detects Remove It Permanently (Firefox addon)
