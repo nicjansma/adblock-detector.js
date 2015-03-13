@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AdblockDetector - Test</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="vendor/mocha/mocha.css" />
+        <script src="vendor/mocha/mocha.js"></script>
+        <script src="vendor/expect/index.js"></script>
+        <script src="vendor/jquery/dist/jquery.js"></script>
+        <script src="../src/adblock-detector.js"></script>
+    </head>
+    <body>
+        <div class="ad-container" style="width: 234px; height: 60px">
+            <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+        </div>
+        <div class="ad-container" style="width: 234px; height: 60px">
+            <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+        </div>
+        <div class="clear: both"></div>
+        <script>
+            mocha.setup('bdd');
+        </script>
+        <div id="mocha"></div>
+        <script src="test-blocker.js"></script>
+        <script>
+            if (window.mochaPhantomJS) {
+                mochaPhantomJS.run();
+            } else {
+                mocha.run();
+            }
+        </script>
+    </body>
+</html>

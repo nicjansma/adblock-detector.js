@@ -1,8 +1,8 @@
 # adblock-detector.js
 
-v0.1.1
+v0.1.2
 
-Copyright 2014 Nic Jansma
+Copyright 2015 Nic Jansma
 
 [http://nicj.net](http://nicj.net)
 
@@ -208,3 +208,4 @@ The tests are run manually.  You should load the `test.html` in your browser of 
 
 * v0.0.1 - 2014-03-22: Initial version
 * v0.1.1 - 2014-04-08: Detects Remove It Permanently (Firefox addon)
+* v0.1.2 - 2015-03-12: Wraps IFRAME access in a try/catch to avoid cross-origin exceptions
