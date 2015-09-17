@@ -1,5 +1,5 @@
-/*eslint-env mocha,jquery*/
-/*global expect,AdblockDetector*/
+/* eslint-env mocha,jquery */
+/* global expect,AdblockDetector */
 describe("AdblockDetector - With Ad Blocker Running", function() {
     "use strict";
 

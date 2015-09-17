@@ -1,4 +1,4 @@
-/*eslint-env jquery,browser,amd*/
+/* eslint-env jquery,browser,amd */
 //
 // adblock-detector.js
 //
@@ -139,7 +139,7 @@
         //
         // AMD / RequireJS
         //
-        define([], function () {
+        define([], function() {
             return AdblockDetector;
         });
     } else if (typeof root !== "undefined") {
