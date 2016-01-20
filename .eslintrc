@@ -1,4 +1,5 @@
 {
+    "extends": "eslint:recommended",
     "rules": {
         // enabled over default
         "valid-jsdoc": [1, {
